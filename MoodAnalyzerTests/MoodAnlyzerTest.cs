@@ -25,14 +25,15 @@ namespace MoodAnalyzerTests
         }
 
         /// <summary>
-        /// TC 1.2: Given “I am in Any Mood” message Should Return HAPPY
+        /// TC 1.2  & 2.1: Given “I am in HAPPY Mood” and null message Should Return HAPPY
         /// </summary>
         [TestMethod]
-        public void GivenHAPPYMoodShouldReturnHappy()
+        [DataRow("I am in HAPPY Mood")]
+        [DataRow(null)]
+        public void GivenHAPPYMoodShouldReturnHappy(string message)
         {
             // Arrange
             string expected = "HAPPY";
-            string message = "I am in HAPPY Mood";
             MoodAnalyse moodAnalyse = new MoodAnalyse(message);
 
             // Act
