@@ -42,6 +42,9 @@ namespace MoodAnalyzerTests
             Assert.AreEqual(expected, mood);
         }
 
+        /// <summary>
+        /// TC 3.1: Given NULL Mood Should Throw MoodAnalysisException.
+        /// </summary>
         [TestMethod]
         public void Given_NULL_Mood_Should_Throw_MoodAnalysisException()
         {
@@ -54,6 +57,24 @@ namespace MoodAnalyzerTests
             catch (MoodAnalysisException e)
             {
                 Assert.AreEqual("Mood should not be null", e.Message);
+            }
+        }
+
+        /// <summary>
+        /// TC 3.2: Given Empty Mood Should Throw MoodAnalysisException Indicating Empty Mood.
+        /// </summary>
+        [TestMethod]
+        public void Given_Empty_Mood_Should_Throw_MoodAnalysisException_Indicating_EmptyMood()
+        {
+            try
+            {
+                string message = "";
+                MoodAnalyse moodAnalyse = new MoodAnalyse(message);
+                string mood = moodAnalyse.AnalyseMood();
+            }
+            catch (MoodAnalysisException e)
+            {
+                Assert.AreEqual("Mood should not be Empty", e.Message);
             }
         }
     }
