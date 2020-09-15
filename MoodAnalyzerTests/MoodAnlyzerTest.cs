@@ -29,7 +29,6 @@ namespace MoodAnalyzerTests
         /// </summary>
         [TestMethod]
         [DataRow("I am in HAPPY Mood")]
-        [DataRow(null)]
         public void GivenHAPPYMoodShouldReturnHappy(string message)
         {
             // Arrange
@@ -41,6 +40,21 @@ namespace MoodAnalyzerTests
 
             // Assert
             Assert.AreEqual(expected, mood);
+        }
+
+        [TestMethod]
+        public void Given_NULL_Mood_Should_Throw_MoodAnalysisException()
+        {
+            try
+            {
+                string message = null;
+                MoodAnalyse moodAnalyse = new MoodAnalyse(message);
+                string mood = moodAnalyse.AnalyseMood();
+            }
+            catch (MoodAnalysisException e)
+            {
+                Assert.AreEqual("Mood should not be null", e.Message);
+            }
         }
     }
 }
