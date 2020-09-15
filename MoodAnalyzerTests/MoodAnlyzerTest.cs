@@ -28,11 +28,11 @@ namespace MoodAnalyzerTests
         /// TC 1.2: Given “I am in Any Mood” message Should Return HAPPY
         /// </summary>
         [TestMethod]
-        public void GivenAnyMoodShouldReturnHAPPY()
+        public void GivenHAPPYMoodShouldReturnHappy()
         {
             // Arrange
             string expected = "HAPPY";
-            string message = "I am in Any Mood";
+            string message = "I am in HAPPY Mood";
             MoodAnalyse moodAnalyse = new MoodAnalyse(message);
 
             // Act
