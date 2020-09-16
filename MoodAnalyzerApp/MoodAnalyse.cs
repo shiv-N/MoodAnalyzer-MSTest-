@@ -8,7 +8,7 @@ namespace MoodAnalyzerApp
     {
         public MoodAnalyse(){ }
 
-        private string message;
+        public string message;
         /// <summary>
         /// Parameterised Constructor.
         /// </summary>

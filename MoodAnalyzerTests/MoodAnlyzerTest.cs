@@ -202,5 +202,16 @@ namespace MoodAnalyzerTests
                 Assert.AreEqual(expected, e.Message);
             }
         }
+
+        /// <summary>
+        /// Test Case 7.1 Given Happy Should Return Happy.
+        /// </summary>
+        [TestMethod]
+        public void Given_HAPPYMessage_WithReflector_Should_ReturnHAPPY()
+        {;
+            string result = MoodAnalyseFactory.SetField( "HAPPY");
+            Assert.AreEqual("HAPPY", result);
+        }
     }
+    
 }

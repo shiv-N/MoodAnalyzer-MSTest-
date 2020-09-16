@@ -77,5 +77,19 @@ namespace MoodAnalyzerApp
                 throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "Method is Not Found");
             }
         }
+
+        /// <summary>
+        /// Function to Set The Field Dynamically using Reflection.
+        /// </summary>
+        /// <param name="moodAnalyseobject"></param>
+        /// <param name="message"></param>
+        public static string SetField(string message)
+        {
+            MoodAnalyse moodAnalyse = new MoodAnalyse("SAD");
+            Type type = typeof(MoodAnalyse);
+            FieldInfo field = type.GetField("message", BindingFlags.Public | BindingFlags.Instance);
+            field.SetValue(moodAnalyse, message);
+            return moodAnalyse.message;
+        }
     }
 }
