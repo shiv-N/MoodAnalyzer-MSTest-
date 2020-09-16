@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Text;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
+using System.Text.RegularExpressions;
 
 namespace MoodAnalyzerApp
 {
@@ -12,17 +13,27 @@ namespace MoodAnalyzerApp
         /// <summary>
         /// CreateMoodAnalyse method to create object of MoodAnalyse class.
         /// </summary>
-        public static object CreateMoodAnalyse(string className)
+        public static object CreateMoodAnalyse(string className,string constructorName)
         {
-            if (className.Equals("MoodAnalyzerApp.MoodAnalyse"))
+            string pattern = @"." + constructorName + "$";
+            Match result = Regex.Match(className, pattern);
+
+            if (result.Success)
             {
-                Assembly executing = Assembly.GetExecutingAssembly();
-                Type moodAnaylseType = executing.GetType(className);
-                return Activator.CreateInstance(moodAnaylseType);
+                try
+                {
+                    Assembly executing = Assembly.GetExecutingAssembly();
+                    Type moodAnaylseType = executing.GetType(className);
+                    return Activator.CreateInstance(moodAnaylseType);
+                }
+                catch (ArgumentNullException)
+                {
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "Class Not Found");
+                }
             }
             else
             {
-                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "Class Not Found");
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "Constructor is Not Found");
             }
         }
     }
