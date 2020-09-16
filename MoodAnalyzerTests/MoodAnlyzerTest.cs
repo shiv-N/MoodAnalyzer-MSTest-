@@ -132,8 +132,26 @@ namespace MoodAnalyzerTests
         public void GivenMoodAnalyseClassName_ShouldReturnMoodAnalyseObject_UsingParameterizedConstructor()
         {
             object expected = new MoodAnalyse("HAPPY");
-            object obj = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.MoodAnalyse");
+            object obj = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.MoodAnalyse", "MoodAnalyse");
             expected.Equals(obj);
+        }
+
+        /// <summary>
+        /// Test Case 5.2 Given Improper Class Name Should throw MoodAnalyssiException.
+        /// </summary>
+        [TestMethod]
+        public void GivenImproperClassNameShouldThrowMoodAnalysisException_UsingParameterizedConstructor()
+        {
+            string expected = "Class Not Found";
+            try
+            {
+                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.DemoClass", "MoodAnalyse");
+
+            }
+            catch (MoodAnalysisException exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
         }
     }
 }
