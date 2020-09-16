@@ -187,7 +187,7 @@ namespace MoodAnalyzerTests
         }
 
         /// <summary>
-        /// Test Case 6.2 Given Happy Should Return Happy.
+        /// Test Case 6.2 Given Improper Method Name Should Return MoodAnalysisException.
         /// </summary>
         [TestMethod]
         public void Given_ImproperMethodName_Should_Throw_MoodAnalysisException()
@@ -208,9 +208,26 @@ namespace MoodAnalyzerTests
         /// </summary>
         [TestMethod]
         public void Given_HAPPYMessage_WithReflector_Should_ReturnHAPPY()
-        {;
-            string result = MoodAnalyseFactory.SetField( "HAPPY");
+        {
+            string result = MoodAnalyseFactory.SetField( "HAPPY", "message");
             Assert.AreEqual("HAPPY", result);
+        }
+
+        /// <summary>
+        /// Test Case 7.2 Given Improper FieldName Should Return MoodAnalysisException.
+        /// </summary>
+        [TestMethod]
+        public void Given_ImproperFieldName_Should_Throw_MoodAnalysisException()
+        {
+            string expected = "Field is Not Found";
+            try
+            {
+                string result = MoodAnalyseFactory.SetField("HAPPY", "DemoMessage");
+            }
+            catch (MoodAnalysisException e)
+            {
+                Assert.AreEqual(expected, e.Message);
+            }
         }
     }
     
