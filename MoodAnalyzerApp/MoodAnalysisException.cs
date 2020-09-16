@@ -14,7 +14,7 @@ namespace MoodAnalyzerApp
         /// </summary>
         public enum ExceptionType
         {
-            NULL_MESSAGE, Empty_Message
+            NULL_MESSAGE, Empty_Message, NO_SUCH_CLASS
         }
 
         ////Creating 'type' variable of type ExceptionType
