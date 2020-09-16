@@ -37,7 +37,7 @@ namespace MoodAnalyzerApp
             }
         }
 
-        public static object CreateMoodAnalyseUsingParameterizedConstructor(string className,string constructorName)
+        public static object CreateMoodAnalyseUsingParameterizedConstructor(string className,string constructorName,string message)
         {
             Type type = typeof(MoodAnalyse);
             if(type.Name.Equals(className) || type.FullName.Equals(className))
@@ -45,7 +45,7 @@ namespace MoodAnalyzerApp
                 if (type.Name.Equals(constructorName))
                 {
                     ConstructorInfo ctor = type.GetConstructor(new[] { typeof(string) });
-                    object instance = ctor.Invoke(new object[] { "HAPPY" });
+                    object instance = ctor.Invoke(new object[] { message });
                     return instance;
                 }
                 else
@@ -59,6 +59,18 @@ namespace MoodAnalyzerApp
                 throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_CLASS, "Class Not Found");
             }
             
+        }
+
+        public static string InvokeAnalyseMood(string message)
+        {
+            //string[] messageAr = { message };
+            Type type = Type.GetType("MoodAnalyzerApp.MoodAnalyse");
+            //ConstructorInfo constructorInfo = MoodAnalyseFactory.GetConstructor("MoodAnalysis");
+            object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.MoodAnalyse",
+                "MoodAnalyse", message);
+            MethodInfo analyseMoodInfo = type.GetMethod("AnalyseMood");
+            object mood = analyseMoodInfo.Invoke(moodAnalyseObject, null);
+            return mood.ToString();
         }
     }
 }

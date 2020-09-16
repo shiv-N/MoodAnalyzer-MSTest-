@@ -132,7 +132,8 @@ namespace MoodAnalyzerTests
         public void GivenMoodAnalyseClassName_ShouldReturnMoodAnalyseObject_UsingParameterizedConstructor()
         {
             object expected = new MoodAnalyse("HAPPY");
-            object obj = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.MoodAnalyse", "MoodAnalyse");
+            object obj = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.MoodAnalyse",
+                "MoodAnalyse", "HAPPY");
             expected.Equals(obj);
         }
 
@@ -145,7 +146,8 @@ namespace MoodAnalyzerTests
             string expected = "Class Not Found";
             try
             {
-                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.DemoClass", "MoodAnalyse");
+                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.DemoClass", 
+                    "MoodAnalyse", "HAPPY");
 
             }
             catch (MoodAnalysisException exception)
@@ -163,13 +165,25 @@ namespace MoodAnalyzerTests
             string expected = "Constructor is Not Found";
             try
             {
-                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.MoodAnalyse", "DemoConstructor");
+                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.MoodAnalyse",
+                    "DemoConstructor","HAPPY");
 
             }
             catch (MoodAnalysisException exception)
             {
                 Assert.AreEqual(expected, exception.Message);
             }
+        }
+
+        /// <summary>
+        /// Test Case 6.1 Given Happy Should Return Happy.
+        /// </summary>
+        [TestMethod]
+        public void GivenHappyMoodShouldReturnHappy()
+        {
+            string expected = "HAPPY";
+            string mood = MoodAnalyseFactory.InvokeAnalyseMood("Happy");
+            Assert.AreEqual(expected, mood);
         }
     }
 }
