@@ -153,5 +153,23 @@ namespace MoodAnalyzerTests
                 Assert.AreEqual(expected, exception.Message);
             }
         }
+
+        /// <summary>
+        /// Test Case 5.3 Given Improper Constructor Name Should throw MoodAnalyssiException.
+        /// </summary>
+        [TestMethod]
+        public void GivenImproperConstructorNameShouldThrowMoodAnalysisException_UsingParameterizedConstructor()
+        {
+            string expected = "Constructor is Not Found";
+            try
+            {
+                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.MoodAnalyse", "DemoConstructor");
+
+            }
+            catch (MoodAnalysisException exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
     }
 }
