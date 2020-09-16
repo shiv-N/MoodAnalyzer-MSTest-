@@ -61,16 +61,21 @@ namespace MoodAnalyzerApp
             
         }
 
-        public static string InvokeAnalyseMood(string message)
+        public static string InvokeAnalyseMood(string message,string methodName)
         {
-            //string[] messageAr = { message };
-            Type type = Type.GetType("MoodAnalyzerApp.MoodAnalyse");
-            //ConstructorInfo constructorInfo = MoodAnalyseFactory.GetConstructor("MoodAnalysis");
-            object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.MoodAnalyse",
-                "MoodAnalyse", message);
-            MethodInfo analyseMoodInfo = type.GetMethod("AnalyseMood");
-            object mood = analyseMoodInfo.Invoke(moodAnalyseObject, null);
-            return mood.ToString();
+            try
+            {
+                Type type = Type.GetType("MoodAnalyzerApp.MoodAnalyse");
+                object moodAnalyseObject = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.MoodAnalyse",
+                    "MoodAnalyse", message);
+                MethodInfo analyseMoodInfo = type.GetMethod(methodName);
+                object mood = analyseMoodInfo.Invoke(moodAnalyseObject, null);
+                return mood.ToString();
+            }
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_METHOD, "Method is Not Found");
+            }
         }
     }
 }
