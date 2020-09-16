@@ -229,6 +229,22 @@ namespace MoodAnalyzerTests
                 Assert.AreEqual(expected, e.Message);
             }
         }
+
+        /// <summary>
+        /// Test Case 7.3 Given Null Message Should Return MoodAnalysisException.
+        /// </summary>
+        [TestMethod]
+        public void Given_NULL_Message_WithReflector_Should_ReturnHAPPY()
+        {
+            try
+            {
+                string result = MoodAnalyseFactory.SetField(null, "message");
+            }
+            catch(MoodAnalysisException e)
+            {
+                Assert.AreEqual("Message should not be null", e.Message);
+            }
+        }
     }
     
 }

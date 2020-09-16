@@ -90,6 +90,10 @@ namespace MoodAnalyzerApp
                 MoodAnalyse moodAnalyse = new MoodAnalyse();
                 Type type = typeof(MoodAnalyse);
                 FieldInfo field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.Instance);
+                if (message == null)
+                {
+                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NO_SUCH_FIELD, "Message should not be null");
+                }
                 field.SetValue(moodAnalyse, message);
                 return moodAnalyse.message;
             }
