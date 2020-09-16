@@ -107,7 +107,7 @@ namespace MoodAnalyzerTests
             }
         }
 
-        // <summary>
+        /// <summary>
         /// Test Case 4.3 Given Improper Constructor should throw MoodAnalysisException.
         /// </summary>
         [TestMethod]
@@ -123,6 +123,17 @@ namespace MoodAnalyzerTests
             {
                 Assert.AreEqual(expected, exception.Message);
             }
+        }
+
+        /// <summary>
+        /// Test Case 5.1 Given MoodAnalyse Class Name Should Return MoodAnalyser Object.
+        /// </summary>
+        [TestMethod]
+        public void GivenMoodAnalyseClassName_ShouldReturnMoodAnalyseObject_UsingParameterizedConstructor()
+        {
+            object expected = new MoodAnalyse("HAPPY");
+            object obj = MoodAnalyseFactory.CreateMoodAnalyseUsingParameterizedConstructor("MoodAnalyzerApp.MoodAnalyse");
+            expected.Equals(obj);
         }
     }
 }
